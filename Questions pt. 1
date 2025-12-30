@@ -1,4 +1,42 @@
 Performance rating data
-  Which movies generated the highest revenue?
+
+1. Which movies generated the highest revenue?
+SELECT revenue, original_title                                                 
+FROM movies 
+ORDER BY revenue   
+DESC LIMIT 5;
+revenue     original_title
+----------  --------------
+2787965087  Avatar        
+1845034188  Titanic       
+1519557910  The Avengers  
+1513528810  Jurassic World
+1506249360  Furious 7    
+
+2. How many movies has each director made?
+SELECT name, 
+COUNT(original_title) 
+FROM directors 
+JOIN movies 
+ON directors.uid = movies.uid 
+GROUP BY name 
+ORDER BY name;
+
+3. What is the total and average revenue across all movies?
+SELECT SUM(revenue), AVG (revenue) 
+FROM movies;
+
+Comparison
+
+1. How do average ratings differ by director?
+
+
+
+
+
+
+
+
+
 
 
