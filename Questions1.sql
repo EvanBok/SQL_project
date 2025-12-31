@@ -120,8 +120,14 @@ SELECT name AS director, SUM(revenue-budget) AS total_profit
  ORDER BY total_profit DESC;
 -- The top directors that geterated the highest total profit are Steven Spielberg, Peter Jackson, James Cameron, Michael Bay, and Christopher Nolan.
 
+#3. Which years had the strongest average ROI?
+SELECT SUBSTR(release_date,1,4) AS release_year, AVG(revenue-budget) AS avg_roi 
+ FROM movies 
+ GROUP BY release_year 
+ ORDER BY avg_roi DESC;
+-- Movies from 1970-1990 tend to have the highest average ROI.
 
-
+Qualifications
 
 
 
