@@ -158,7 +158,7 @@ SELECT name AS director_name, AVG(vote_average) AS avg_rating,
  HAVING movie_revenue > 1000000000
  ORDER BY movie_revenue DESC;
 
-Insight and Decision making
+Insight and Decision making - Which directors would be the best investment for a movie producer.
 #1. Which directors balance high ratings and strong revenue?
 SELECT 
    name, 
@@ -177,6 +177,42 @@ SELECT
 #3. Who produces above-average ratings without requiring above-average budgets?
 
 #4. Which movies exceeded what we would normally expect from that director?
+
+#5. Which directors generate the highest total profit?
+SELECT name AS director, SUM(revenue-budget) AS total_profit 
+ FROM movies 
+ JOIN directors ON movies.director_id = directors.id 
+ WHERE revenue IS NOT NULL AND budget IS NOT NULL
+ GROUP BY director
+ ORDER BY total_profit DESC
+ LIMIT 20;
+
+#6. Which directors have the highest average profit per movie?
+SELECT 
+  name AS director, 
+  COUNT(movies.id) AS movie_count, 
+  AVG(revenue-budget) AS avg_profit
+FROM movies 
+JOIN directors
+  ON movies.director_id = directors.id
+WHERE budget>0 
+   AND revenue>0
+GROUP BY director
+HAVING COUNT(movies.id)>=3
+ORDER BY avg_profit DESC;
+
+#7. Which directors most frequently produce profitable films?
+SELECT
+ name AS director,
+ COUNT (movies.id) AS profitable_films
+FROM movies
+JOIN directors 
+ ON movies.director_id = directors.id
+WHERE revenue>budget
+GROUP BY director
+HAVING COUNT(movies.id)>3
+ORDER BY profitable_films DESC;
+-- because it is asking how frequently (how often) a director produces profitable films we use COUNT(movies.id) and not revenue-budget. R-B would be used if profitable is the movie or director not how often.
 
 
 
