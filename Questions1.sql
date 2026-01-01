@@ -159,7 +159,19 @@ SELECT name AS director_name, AVG(vote_average) AS avg_rating,
  ORDER BY movie_revenue DESC;
 
 Insight and Decision making
+#1. Which directors balance high ratings and strong revenue?
+SELECT 
+   name, 
+   AVG(vote_average) AS avg_rating, 
+   SUM(revenue) AS total_revenue
+ FROM movies 
+ JOIN directors ON movies.director_id = directors.id 
+ GROUP BY name 
+ HAVING avg_rating >6.12 AND movies.id>3 AND total_revenue>82777095
+ ORDER BY avg_rating DESC, total_revenue DESC;
+-- The conditions to qualify for high ratings and strong revnue are to be above the average movie rating of 6.12, average total revenue of 82777095, and having made at least 3 movies, both averages derived from the dataset.
 
+#2. Which directors are the safest investment based on consistency?
 
 
 
