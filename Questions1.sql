@@ -174,5 +174,10 @@ SELECT
 #2. Which directors are the safest investment based on consistency?
 
 
+#3. Who produces above-average ratings without requiring above-average budgets?
+
+#4. Which movies exceeded what we would normally expect from that director?
+
+
 
 
