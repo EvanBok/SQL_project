@@ -1,3 +1,5 @@
+Use a sample size of 3 movies to reduce sampling bias
+
 Performance rating data
  
 #1. Which movies generated the highest revenue?
@@ -196,34 +198,30 @@ SELECT
 
 #5. Which directors generate the highest total profit?
 SELECT name AS director, SUM(revenue-budget) AS total_profit 
- FROM movies 
- JOIN directors ON movies.director_id = directors.id 
- WHERE revenue IS NOT NULL AND budget IS NOT NULL
- GROUP BY director
- ORDER BY total_profit DESC
- LIMIT 20;
+FROM movies 
+JOIN directors ON movies.director_id = directors.id 
+WHERE revenue IS NOT NULL AND budget IS NOT NULL
+GROUP BY director
+ORDER BY total_profit DESC
+LIMIT 20;
 
 #6. Which directors have the highest average profit per movie?
-SELECT 
-  name AS director, 
-  COUNT(movies.id) AS movie_count, 
-  AVG(revenue-budget) AS avg_profit
+SELECT name AS director, COUNT(movies.id) AS movie_count, AVG(revenue-budget) AS avg_profit
 FROM movies 
 JOIN directors
-  ON movies.director_id = directors.id
+ON movies.director_id = directors.id
 WHERE budget>0 
-   AND revenue>0
+AND revenue>0
 GROUP BY director
 HAVING COUNT(movies.id)>=3
 ORDER BY avg_profit DESC;
 
 #7. Which directors most frequently produce profitable films?
-SELECT
- name AS director,
- COUNT (movies.id) AS profitable_films
+SELECT name AS director,
+COUNT (movies.id) AS profitable_films
 FROM movies
 JOIN directors 
- ON movies.director_id = directors.id
+ON movies.director_id = directors.id
 WHERE revenue>budget
 GROUP BY director
 HAVING COUNT(movies.id)>3
@@ -234,12 +232,29 @@ ORDER BY profitable_films DESC;
 SELECT name AS director, AVG(revenue-budget) AS avg_profit, COUNT(movies.id) FROM movies JOIN directors ON movies.director_id = directors.id WHERE revenue>0 AND budget>0 GROUP BY director HAVING avg_profit> 53552482 AND COUNT(movies.id)>=3 ORDER BY avg_profit DESC;
 
 #9. Which directors avoid major financial losses?
-
+ 
 #10. Which directors have the highest average audience rating?
+SELECT name AS director, AVG(vote_average) AS avg_rating,
+COUNT(movies.id) movie_count
+FROM movies 
+JOIN directors 
+ON movies.director_id=directors.id 
+WHERE vote_average>0 AND movies.id>0
+GROUP BY director
+HAVING movie_count>=3
+ORDER BY avg_rating DESC;
 
+ 
 #11. Which directors maintain rating consistency across films?
 
 #12. Which directors attract the largest total audience engagement?
+SELECT name AS director, SUM(vote_count) AS total_votes, popularity, COUNT(movies.id) AS movie_count
+FROM movies 
+JOIN directors 
+ON movies.director_id=directors.id 
+GROUP BY director 
+HAVING COUNT(movies.id)>3
+ORDER BY total_votes DESC, popularity DESC;
 
 Which directors show improving financial performance over time?
 Which directors show improving audience reception?
