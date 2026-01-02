@@ -20,6 +20,14 @@ ORDER BY name;
 SELECT SUM(revenue), AVG (revenue) 
 FROM movies;
 
+#4. Which movies were made by directors whose average rating is above 7.5?
+SELECT name AS director, title, vote_average AS rating
+FROM movies
+JOIN directors
+ON movies.director_id = directors.id
+WHERE movies.director_id IN(SELECT director_id FROM movies GROUP BY director_id HAVING AVG(vote_average)>7.5)
+ORDER BY director, rating DESC;
+
 
 Comparison
 #1. How do average ratings differ by director?
