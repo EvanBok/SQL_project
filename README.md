@@ -4,7 +4,7 @@ Using SQL, this project examines financial outcomes, historical trends, performa
 2. **[insights.sql](Insights.sql))**:  Builds on the results of Industry_Analysis.sql by applying additional queries to derive actionable insights, which are summarized for a report to the Director of Analytics and Insights.
 
 ## Scenario
-The producer company I work for is a mid-size, growth oriented film production company focused on choosing a director with high profitability, consistent results, and avoiding one hit wonders.
+The producer company I work for is a large-cap, growth oriented film production company focused on choosing a director that fits a $300-400 million budget with high profitability, consistent results, and strong audience engagement.
 
 ## Commands Used
 * SELECT
