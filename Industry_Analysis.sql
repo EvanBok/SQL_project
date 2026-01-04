@@ -282,6 +282,17 @@ HAVING
 COUNT(m.id) >= 3 AND (AVG(m.budget) * 3) BETWEEN 300000000 AND 400000000 AND MAX(m.budget) <= 120000000
 ORDER BY estimated_annual_spend ASC;
 
+#3. What is average budget spent per movie by each director?
+SELECT
+  d.name AS director,
+  m.title,
+  m.budget
+FROM movies m
+JOIN directors d
+ON m.director_id = d.id
+WHERE m.budget > 0
+ORDER BY d.name, m.budget DESC;
+
 
 
 
