@@ -21,3 +21,4 @@ CREATE TABLE `directors` (
 `uid` INTEGER,
 `department` TEXT);
 
+https://www.kaggle.com/datasets/poojapragatika/sql-based-imdb-data-for-analysis-projects
